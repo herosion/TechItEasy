@@ -17,7 +17,7 @@ Installation
 
 Clone the repository
 ```
-$ https://github.com/Arnaudlaurent/techiteasy.git
+$ https://github.com/herosion/techiteasy.git
 ```
 
 Run `composer install` to setup all vendors
