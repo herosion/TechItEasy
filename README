@@ -13,7 +13,7 @@ Installation
 
 Clone the repository
 
-$ https://github.com/Arnaudlaurent/techiteasy.git
+$ https://github.com/herosion/TechItEasy.git
 Run composer install to setup all vendors
 
 Next you must ensure that NodeJS is installed on your machine
@@ -58,11 +58,16 @@ WARNING : for windows user launch MySQLconsole from Wamp
 mysql> CREATE DATABASE `techiteasy`;
 Set mysql connection parameters in .env with your localhost database informations
 
+APP_ENV=local
+APP_DEBUG=true
+APP_KEY=lgm6I4eoGVw0vWzs7PzppViIZnhfdzG8
+APP_URL=http://localhost
+
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=techiteasy
-DB_USERNAME=root
-DB_PASSWORD=root (or none)
+DB_DATABASE=techiteasy2
+DB_USERNAME=admin
+DB_PASSWORD=admin (or none)
 Then run the database migration with the command php artisan migrate
 
 Last step run the seed of the database with php artisan db:seed

@@ -1,0 +1,206 @@
+@font-face {
+  font-family: norwester;
+  src: url(../fonts/norwester.otf); }
+
+@font-face {
+  font-family: quicksand;
+  src: url(../fonts/Quicksand-Regular.otf); }
+
+body {
+  background: url("../img/background.png"); }
+
+.navbar {
+  border: 0 !important;
+  z-index: 1; }
+
+.login-panel {
+  margin-top: 70px; }
+
+.connec-icon{
+  color: #ef6b00;
+}
+
+
+/*
+	LOGO
+*/
+.logo-1 {
+  font-family: Roboto;
+  font-size: 20px;
+  color: #000; }
+
+.logo-2 {
+  color: #ef6b00;
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 21px;
+  letter-spacing: 2px; }
+
+.logo-3 {
+  font-weight: bold;
+  font-family: norwester;
+  color: #000; }
+
+.logo-4 {
+  color: #ef6b00;
+  font-family: quicksand;
+  font-weight: bold;
+  font-size: 21px; }
+
+/*
+	SIDEBAR
+*/
+.sidebar {
+  position: fixed;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: block;
+  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* Scrollable contents if viewport is shorter than content. */
+  background-color: #f5f5f5; }
+
+.nav-sidebar {
+  margin-right: -21px;
+  /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px; }
+
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+  color: #ef6b00; }
+
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #ef6b00; }
+
+/*
+	ADMIN
+*/
+.main {
+  padding: 20px 40px; }
+  .main .page-header {
+    margin-top: 0; }
+
+.admin-content {
+  background: #fff;
+  display: block;
+  min-height: 250px;
+  overflow: hidden;
+  padding: 20px 30px;
+  margin-top: 50px }
+
+/*
+	FOOTER
+*/
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0; }
+
+.by-extia {
+  text-align: right; }
+
+/* 
+	CUSTOM BUTTONS 
+*/
+.btn-extia {
+  color: #fff;
+  background-color: #ef6b00;
+  border-color: #db5f00; }
+
+.btn-extia.focus, .btn-extia:focus {
+  color: #fff;
+  background-color: #d3610a;
+  border-color: #ef6b00; }
+
+.btn-extia:hover {
+  color: #fff;
+  background-color: #d3610a;
+  border-color: #d66426; }
+
+.btn-extia.active, .btn-extia:active, .open > .dropdown-toggle.btn-extia {
+  color: #fff;
+  background-color: #d3610a;
+  border-color: #d66426; }
+
+.btn-extia.active.focus, .btn-extia.active:focus, .btn-extia.active:hover, .btn-extia:active.focus, .btn-extia:active:focus, .btn-extia:active:hover, .open > .dropdown-toggle.btn-extia.focus, .open > .dropdown-toggle.btn-extia:focus, .open > .dropdown-toggle.btn-extia:hover {
+  color: #fff;
+  background-color: #d66426;
+  border-color: #ef6b00; }
+
+.btn-extia.active, .btn-extia:active, .open > .dropdown-toggle.btn-extia {
+  background-image: none; }
+
+.btn-extia.disabled, .btn-extia.disabled.active, .btn-extia.disabled.focus, .btn-extia.disabled:active, .btn-extia.disabled:focus, .btn-extia.disabled:hover, .btn-extia[disabled], .btn-extia[disabled].active, .btn-extia[disabled].focus, .btn-extia[disabled]:active, .btn-extia[disabled]:focus, .btn-extia[disabled]:hover, fieldset[disabled] .btn-extia, fieldset[disabled] .btn-extia.active, fieldset[disabled] .btn-extia.focus, fieldset[disabled] .btn-extia:active, fieldset[disabled] .btn-extia:focus, fieldset[disabled] .btn-extia:hover {
+  background-color: #ef6b00;
+  border-color: #db5f00; }
+
+.btn-extia .badge {
+  color: #ef6b00;
+  background-color: #fff; }
+
+.btn-info {
+  color: #fff;
+  background-color: #56C3C3;
+  border-color: #46b8da; }
+
+.btn-info.focus, .btn-info:focus {
+  color: #fff;
+  background-color: #56C3C3;
+  border-color: #1b6d85; }
+
+.btn-cat{
+  color: #fff;
+  background-color: #56C3C3;
+  border-color: #46b8da;
+  border-radius: 5px; 
+}
+
+
+/*
+	OVERWRITE BOOTSTRAP
+*/
+.alert {
+  position: absolute;
+  width: 500px;
+  margin: 0 auto;
+  left: 0;
+  right: 0; }
+
+.filtre{
+  font-size: .1rem;
+  font-style: italic;
+} 
+/*# sourceMappingURL=app.css.map */
+
+.clear{
+  clear:both;
+}
+
+.table-div {
+
+}
+
+.table-div > div:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.message-conf{
+  z-index: 1;
+  position: absolute;
+  top: 12%;
+  left:25%;
+}
+
+#dynatable-query-search-mytable2::placeholder{
+  color: #fff;
+}

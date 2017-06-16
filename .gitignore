@@ -1,0 +1,13 @@
+bootstrap/compiled.php
+vendor/*
+node_modules/*
+storage/logs
+composer.phar
+composer.lock  # Remove this one after you create a project
+.env.*.php
+.env.php
+.DS_Store
+Thumbs.db
+/nbproject/private/
+/.idea
+/.env
