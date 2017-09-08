@@ -68,6 +68,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('reponse', 'Admin\ReponseController');
     Route::resource('questionnaire', 'Admin\QuestionnaireController');
 
+    Route::get('questions/questionsBycategories', 'Admin\QuestionnaireController@questionsBycat')->name('questionsBycat');
+
     Route::post('question/{id}/test', 'Admin\QuestionController@testQuestion');
 });
 

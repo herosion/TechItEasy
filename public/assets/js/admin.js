@@ -145,6 +145,72 @@ $('#search-category2').change( function() {
   });*/
 
 
+//Ajout des questions à la modale en fonction catégorie questionnaire
+$('#addQ').on('click', function() {
+    
+    var catQ = [];
+    //var qId = $('.questionsQuestionnaire tr').data('t');
+    var lien = $(this).data('url');
+    var token = $(this).data('token');
+
+    console.log(qId);
+
+    //Récupère les catégories cochés
+    $('#cat-table input').each(function() {
+        var valCat = $(this).attr('value');
+        if ($(this).is(':checked')) {
+          if ($.inArray(valCat, catQ) == -1) { 
+                catQ.push(valCat); //récupère id des catégories
+          }
+        }else{
+            if ($.inArray(valCat, catQ) != -1) {
+               catQ.splice(catQ.indexOf(valCat),1);
+            }
+        }
+    });
+
+    $.ajax({
+          url: lien,
+          method: 'GET',
+          dataType: 'JSON',
+          data: {
+              '_token': token,
+              'cat': catQ,
+              '_method': 'GET'
+          },
+          success: function(questions) {
+
+            $('.questBycat tr').remove();
+
+            $.each(questions, function(key, val){
+              
+              var checked = qId == val['id'] ? 'checked' : '';
+              console.log(checked);
+
+              $('.questBycat').append(
+
+                '<tr>'+
+                  '<td>'+ val['id'] +'</td>'+
+                  '<td>'+ val['name'] +'</td>'+
+                  '<td>'+ val['label'] +'</td>'+
+                  '<td>'+ val['description'] +'</td>'+ 
+                  '<td>'+ val['level'] +'</td>'+
+                  '<td>'+
+                    '<input type="checkbox" name="questions[]" value="'+val['id']+'" data-id="'+val['id']+'" data-href="http://localhost:8000/admin/question/'+val['id']+'" data-cat="'+val['name']+'"'+
+                    'data-lvl="'+val['level']+'" data-label="'+val['label']+'" data-des="'+val['description']+'" '+checked+' />'+                
+                  '</td>'+               
+                '</tr>'
+
+              );
+
+              
+            });
+          },
+          error: function(statut, erreur){
+              alert('La requête n\'a pas abouti'); 
+          }
+      });
+});
 
 //Ajout des questions à un questionnaire
 var t = [];
@@ -188,56 +254,6 @@ $('#addQuestions').on('click', function() {
     $('#myModalQuestions').modal('hide');
 });
 
-//Ajout des questions à la modale en fonction catégorie questionnaire
-var catQ = [];
-
-$('#cat-table input').each(function() {
-    if ($(this).is(':checked')) {
-        catQ.push($(this).attr('value')); //récupère tab
-    }
-});
-
-$('#addQ').on('click', function() {
-
-});
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-/*
-$(".suppression-badge").on('click', function () {
-    var url = $(this).data('url');
-    var CSRF_TOKEN = $('#csrf').attr('value');
-
-    console.log(url);
-    
-    var aJax = $.ajax({
-        type: "POST",
-        url: url + '/test',
-        dataType: 'JSON',
-        data: {_token: CSRF_TOKEN}
-    })
-            .done(function (response) {
-                if (response.data) {
-                    $("#delete-text").text("êtes vous sure de vouloir supprimer cette question?");
-                    $("#delete-btn").attr("disabled", false);
-                } else {
-                    $("#delete-text").text("Impossible de supprimer cette question, elle est utilisée dans des un questionnaire");
-                    $("#delete-btn").attr("disabled", true);
-                }
-            })
-            .fail(function () {
-                alert("error");
-            });
-    $("#delete-form").attr('action', url);
-});*/

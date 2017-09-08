@@ -25,25 +25,33 @@
 <div class="row">
 	<div class="col-md-6">
 		{!! Form::open(array('url' => $questionnaire->id ? URL::route('admin.questionnaire.update', $questionnaire->id) : URL::route('admin.questionnaire.store'), 'method' => $questionnaire->id ? 'put' : 'post')) !!}
+		{{ csrf_field() }}
 		<br>
 		<div class="form-group">
 			{!! Form::text('title', $questionnaire->title, array('class' => 'form-control', 'placeholder' => 'Nom', '	')) !!}
 		</div>
-		
-		<br>
-
-		<table id="cat-table">
-			@forelse($categories as $category)
-			<tr>
-				<td id="category-name-{{ $category->id }}">{{ $category->name }}</td>
-				<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-				<td>
-					 <input type="checkbox" name="categories[]" value="{{ $category->id }}" {{ $questionnaire->id? $questionnaire->isCat($category->id) : '' ? 'checked' : '' }} />
-				</td>
-			</tr>
-			@empty
-        	@endforelse
-		</table>
+	</div>
+</div>
+<br>
+<div class="row">
+	<div class="col-md-12">
+		@forelse($categories->chunk(3) as $chunk)
+		<div class="col-md-2">
+			<table id="cat-table">
+				@forelse($chunk as $category)
+				<tr>
+					<td id="category-name-{{ $category->id }}">{{ $category->name }}</td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td>
+						 <input type="checkbox" name="categories[]" value="{{ $category->id }}" {{ $questionnaire->isCat($category->id) ? 'checked' : '' }} />
+					</td>
+				</tr>
+				@empty
+	        	@endforelse
+			</table>
+		</div>
+		@empty
+		@endforelse
 	</div>
 </div>
 
@@ -67,13 +75,12 @@
 
     @if($questionnaire->id)
 	<div class="col-md-2 col-md-offset-3 form-group">
-    	<button id="addQ" type="button" class="btn btn-extia" data-toggle="modal" data-target="#myModalQuestions">
-		  Ajouter/Supprimer des questions <i class="fa fa-plus"></i>
+    	<button id="addQ" type="button" class="btn btn-extia" data-toggle="modal" data-target="#myModalQuestions" data-url="{{ route('questionsBycat') }}" data-token="{{ csrf_token() }}"> Ajouter/Supprimer des questions <i class="fa fa-plus"></i>
 		</button>
     </div>
     @else
     <div class="col-md-2 form-group">
-    	<button id="addQ" type="button" class="btn btn-extia" data-toggle="modal" data-target="#myModalQuestions">
+    	<button id="addQ" type="button" class="btn btn-extia" data-toggle="modal" data-target="#myModalQuestions" data-url="{{ route('questionsBycat') }}" data-token="{{ csrf_token() }}">
 		  Ajouter des questions <i class="fa fa-plus"></i>
 		</button>
     </div>
@@ -94,7 +101,7 @@
 		            <th>Actions</th>
 		        </tr>	
 		    </thead>
-		    <tbody>
+		    <tbody class="questionsQuestionnaire">
 		    	@if($questionnaire->id)
 		        @foreach($questions as $question)
 		        
@@ -140,43 +147,8 @@
 				            <th>Sélection</th>
 				        </tr>	
 				    </thead>
-				    <tbody>
-				    @if($questionnaire->id)
-
-				     @forelse($questionsAll as $q)
-				      @forelse($catsQuestionnaire as $cat)
-				        @if($q->category_id == $cat->id)
-				        <tr>
-				            <td>{{ $q->id }}</td>
-				            <td>{{ $q->category->name }}</td>
-				            <td>{{ $q->label }}</td>
-				            <td>{{ $q->description }}</td>
-				            <td>{{ $q->level }}</td>
-				            <td>
-				                <input data-id="{{ $q->id }}" data-href="{!! route('admin.question.show', $q->id) !!}" data-cat="{{$q->category->name}}" data-lvl="{{$q->level}}" data-label="{{$q->label}}" data-des="{{ $q->description}}" type="checkbox" name="questions[]" value="{{ $q->id }}"  {{ $questionnaire->id? $questionnaire->isQuestion($q->id) : ''? 'checked' : '' }} />
-				            </td>
-				        </tr>
-				        @endif
-				       @empty
-				       @endforelse
-				     @empty
-				     @endforelse
-
-					@else
-					@forelse($questionsAll as $q)
-				        <tr>
-				            <td>{{ $q->id }}</td>
-				            <td>{{ $q->category->name }}</td>
-				            <td>{{ $q->label }}</td>
-				            <td>{{ $q->description }}</td>
-				            <td>{{ $q->level }}</td>
-				            <td>
-				                <input data-id="{{ $q->id }}" data-href="{!! route('admin.question.show', $q->id) !!}" data-cat="{{$q->category->name}}" data-lvl="{{$q->level}}" data-label="{{$q->label}}" data-des="{{ $q->description}}" type="checkbox" name="questions[]" value="{{ $q->id }}"  {{ $questionnaire->id? $questionnaire->isQuestion($q->id) : ''? 'checked' : '' }} />
-				            </td>
-				        </tr>
-				     @empty
-				     @endforelse
-				    @endif
+				    <tbody class="questBycat">
+				    
 				    </tbody>
 				</table>
 			</div>
@@ -194,6 +166,6 @@
 <div class="footer pull-right">
     <a href="{!! route('admin.questionnaire.index') !!}" class="btn btn-default ">Annuler</a>
     <button type="submit" class="btn btn-extia ">{!! $questionnaire->id ? 'Sauvegarder <i class="fa fa-check"></i>' : 'Créer <i class="fa fa-plus"></i>' !!}</i></button>
-		{!! Form::close() !!}
+	{!! Form::close() !!}
 </div>
 @endsection

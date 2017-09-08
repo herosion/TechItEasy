@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use DB;
 use Date;
+use Response;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
@@ -91,27 +92,37 @@ class QuestionnaireController extends Controller
         $catsQuestionnaire = $questionnaire->categories;
         
         //$questionsAll = Question::with('category')->paginate($this->nbPaginate);
-        $questionsAll = Question::all(); //paginate($this->nbPaginate);
-        /*dump($questionsAll); 
-        foreach ($questionsAll as $q) {
+        $questionsAll = Question::all();
 
-            foreach ($catsQuestionnaire as $cat) {
-                
-                if ($q->category_id == $cat->id) {
-                    
-                    $test[] = $q; 
-                }
-            }
-           
-        }
+        /*$questionsWithCats = Question::join('categories', 'categories.id', '=', 'questions.category_id')
+            ->join('questionnaire')
+            ->get();*/
 
-        dump($test); die;*/
+        /*$questionsWithQ = Question::join('question_questionnaire', 'questions.id', '=', 'question_questionnaire.question_id')
+            ->join('questionnaires', 'questionnaires.id', '=', 'question_questionnaire.questionnaire_id')
+            ->get();*/
 
         $categories = Category::paginate(8);
 
         $questions = $questionnaire->questions()->paginate($this->nbPaginate);
 
         return view('admin.questionnaire-create-update', compact('page', 'questionnaire','categories', 'questions', 'questionsAll', 'catsQuestionnaire'));
+    }
+
+    public function questionsBycat(Request $request) {
+
+        /*if ($this->request->is('ajax')) {
+            debug($this->request->data);
+            die();
+        }*/
+        $catagories = $request->cat;
+
+        $questions = Question::select('questions.*', 'categories.name')
+            ->join('categories', 'categories.id', '=', 'questions.category_id')
+            ->whereIn('category_id', $catagories)
+            ->get();
+        //$q->questions();
+        return Response::json($questions);
     }
 
     /**
@@ -123,6 +134,7 @@ class QuestionnaireController extends Controller
      */
     public function update(Request $request, $id) {
         
+        dump($request->all()); die; 
 
         $page = 'questionnaire';
         $date = Date::now();
@@ -145,6 +157,7 @@ class QuestionnaireController extends Controller
                 ->route('admin.questionnaire.index')
                 ->withSuccess('Le questionnaire a bien été modifiée.');
     }
+
      /**
      * Store a newly created resource in storage.
      *

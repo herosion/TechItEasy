@@ -3,7 +3,7 @@
         <a href="{!! route('dashboard') !!}"><i class="fa fa-tachometer"></i> Dashboard</a>
     </li>
     <li{!! isset($page) && $page == 'questionnaire' ? ' class="active"' : '' !!}>
-        <a href="{!! route('admin.questionnaire.index') !!}"><i class="fa fa-file-text"></i></i> Questionnaire</a>
+        <a href="{!! route('admin.questionnaire.index') !!}"><i class="fa fa-file-text"></i></i> Questionnaires</a>
     </li>
     <li{!! isset($page) && $page == 'question' ? ' class="active"' : '' !!}>
         <a href="{!! route('admin.question.index') !!}"><i class="fa fa-question-circle"></i> Questions</a>

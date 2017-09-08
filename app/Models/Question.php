@@ -12,7 +12,7 @@ class Question extends Model
      * @var string
      */
     protected $table = 'questions';
-    public $timestamps = true;
+    public $timestamps = false;
     protected $dates = ['update_at', 'created_at'];
 
     /**

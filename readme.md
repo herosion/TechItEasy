@@ -78,16 +78,16 @@ WARNING : for windows user launch MySQLconsole from Wamp
 
 ```
 #!sql
-mysql> CREATE DATABASE `techiteasy`;
+mysql> CREATE DATABASE `techiteasy2`;
 ```
 
 Set mysql connection parameters in `.env` with your localhost database informations
 ```
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=techiteasy
-DB_USERNAME=root
-DB_PASSWORD=root (or none)
+DB_DATABASE=techiteasy2
+DB_USERNAME=admin
+DB_PASSWORD=admin (or none)
 ```
 Then run the database migration with the command `php artisan migrate`
 

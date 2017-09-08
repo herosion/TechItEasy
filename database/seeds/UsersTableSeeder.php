@@ -13,8 +13,8 @@ class UsersTableSeeder extends Seeder
     {
 		$admin = DB::table('users')->insert([
             'login' => 'admin',
-            'email' => 'lemee.benjamin@hotmail.fr'
-            'password' => bcrypt('toor'),
+            'email' => 'lemee.benjamin@hotmail.fr',
+            'password' => bcrypt('toor')
         ]);
 
         /*$admin->questions()->sync([1, 2]);
